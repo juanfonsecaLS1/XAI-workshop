@@ -1,0 +1,46 @@
+---
+title: "Untitled"
+format: gfm
+---
+
+
+Loading packages
+
+```{r}
+library(tidyverse)
+```
+
+Loading data
+
+```{r}
+data <- read_csv("mnist_pred_3_5_8_random.csv")
+```
+
+Data
+```{r}
+data |> head()
+```
+
+Producing a plot to identify the misclassified instances. 
+
+```{r}
+data |> 
+ggplot(aes(x = `X coordinate`,
+y = `Y coordinate`,
+col = label,
+alpha = !eval,
+shape = !eval,
+size = !eval))+
+    geom_point()+
+    coord_fixed()+
+    theme_minimal()+
+    scale_shape_manual(values = c("o","+"))+
+    scale_color_discrete(palette = "Paired")+
+    scale_size_manual(values = c(2,9))+
+    scale_alpha_manual(values = c(0.1,0.8))+
+    labs(shape = "Misclassified",
+    size = "Misclassified",
+    alpha = "Misclassified")
+    
+
+```
